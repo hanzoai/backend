@@ -7,7 +7,7 @@ Install `pnpm` [like so](https://pnpm.io/installation)
 The usual scripts for a Next site, using `pnpm`
 ```
 pnpm install
-cd api/<siteName>
+cd api
 pnpm dev
 ```
 
