@@ -1,57 +1,49 @@
 {
-  "name": "hanzo-backend",
-  "description": "Cloud run instance for running Hanzo's backend functionality",
-  "version": "1.9.3",
   "private": true,
-  "main": "build/index.js",
-  "scripts": {
-    "start": "node build/index.js",
-    "dev": "nodemon",
-    "test": "mocha test/index.test.js --exit",
-    "system-test": "NAME=Cloud mocha test/system.test.js --timeout=180000",
-    "lint": "eslint '**/*.js'",
-    "fix": "eslint --fix '**/*.js'",
-    "build": "tsc;cpy --cwd=src --parents '**/*.json' ../build/",
-    "deploy": "./deploy.sh --project"
-  },
+  "name": "hanzo-backend",
+  "version": "0.1.0",
   "engines": {
-    "node": "18"
+    "pnpm": ">=9"
   },
-  "author": "Hanzo Inc.",
-  "license": "Apache-2.0",
-  "dependencies": {
-    "@google-cloud/logging": "^11.1.0",
-    "@google-cloud/secret-manager": "^5.6.0",
-    "algoliasearch": "^4.24.0",
-    "axios": "^1.7.2",
-    "cors": "^2.8.5",
-    "cpy-cli": "^5.0.0",
-    "express": "^4.17.1",
-    "file-type": "^19.3.0",
-    "firebase-admin": "^12.2.0",
-    "firebase-functions": "^5.0.1",
-    "lodash": "^4.17.21",
-    "node-fetch": "^3.3.2",
-    "sucrase": "^3.31.0",
-    "uuid": "^10.0.0"
+  "scripts": {
+    "clean:nm": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
+    "clean:nxt": "find . -name '.next' -type d -prune -exec rm -rf '{}' +",
+    "clean:all": "pnpm clean:nm && pnpm clean:nxt && rm pnpm-lock.yaml"
+
   },
   "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@types/node": "20.14.11",
-    "firebase-tools": "^13.13.3",
-    "google-auth-library": "^9.1.1",
-    "js-beautify": "^1.13.0",
-    "mocha": "^10.7.0",
-    "nodemon": "^3.1.4",
-    "prettier": "^3.3.3",
-    "pretty-quick": "^4.0.0",
-    "supertest": "^7.0.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "@types/jquery": "^3.5.30",
+    "webpack-watch-files-plugin": "^1.2.1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
+  "//": "re 'supports-color': https://stackoverflow.com/questions/76591038/module-not-found-esm-packages-supports-color-need-to-be-imported-use-import",
+  "pnpm": {
+    "overrides": {
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1",
+      "@types/react": "^18.3.2",
+      "@types/react-dom": "^18.3.0",
+      "supports-color": "8.1.1",
+      "@hanzo/brand": "0.1.16",
+      "@hanzo/auth": "2.4.12",
+      "@hanzo/commerce": "7.1.5",
+      "@hanzo/ui": "3.8.21",
+      "react-hook-form": "7.51.4"
+    },
+    "allowedDeprecatedVersions": {
+      "request": "*"
     }
+  },
+  "dependencies": {
+    "@mailchimp/mailchimp_transactional": "^1.0.59",
+    "@types/mailchimp__mailchimp_transactional": "^1.0.10",
+    "@types/nodemailer": "^6.4.15",
+    "gsap": "^3.12.5",
+    "jquery": "^3.7.1",
+    "mailchimp_transactional": "0.0.1-security",
+    "nodemailer": "^6.9.14"
+  },
+  "resolutions": {
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.2"
   }
 }
