@@ -1,9 +1,9 @@
 import { auth, db } from "../firebaseConfig";
 import { Request, Response } from "express";
-import { rowyUsers } from "../constants/Collections";
+import { hanzoUsers } from "../constants/Collections";
 import { getProjectId } from "../metadataService";
 import { User } from "../types/User";
-import { inviteUserService } from "../rowyService";
+import { inviteUserService } from "../hanzoService";
 
 const getFirebaseAuthUser = async (email: string) => {
   try {
@@ -20,7 +20,7 @@ export const inviteUser = async (req: Request, res: Response) => {
     const projectId = await getProjectId();
     // check if user exists
     const userQuery = await db
-      .collection(rowyUsers)
+      .collection(hanzoUsers)
       .where("email", "==", email)
       .get();
     if (userQuery.docs.length !== 0) {

@@ -1,5 +1,5 @@
 import { db, auth } from "../firebaseConfig";
-import { getExtension } from "../rowyService";
+import { getExtension } from "../hanzoService";
 
 type ForcedSyncRequest = {
   type: "extension" | "derivative" | "defaultValue";

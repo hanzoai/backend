@@ -49,7 +49,7 @@ export const data2storage = async (
   }
 
   const file = bucket.file(
-    `${options.folderPath ?? "rowyUploads"}/${fileName}`
+    `${options.folderPath ?? "hanzoUploads"}/${fileName}`
   );
   const token = uuid.v4();
   await file.save(data, {

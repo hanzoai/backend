@@ -1,5 +1,5 @@
 {
-  "name": "rowy-functions",
+  "name": "hanzo-functions",
   "version": "1.0.0",
   "scripts": {
     "deploy": "echo 'n\n' | firebase deploy --interactive"

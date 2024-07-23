@@ -1,6 +1,6 @@
 import { db } from "../firebaseConfig";
 import admin from "firebase-admin";
-import { rowyUser } from "./utils";
+import { hanzoUser } from "./utils";
 export async function insertErrorToStreamer(
   errorRecord: any,
   streamLogger: any
@@ -40,7 +40,7 @@ export function commandErrorHandler(
 
     const errorRecord = {
       errorType: "commandError",
-      ranBy: rowyUser(meta.user),
+      ranBy: hanzoUser(meta.user),
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
       stdout: stdout ?? "",
       stderr: stderr ?? "",
@@ -68,7 +68,7 @@ export async function logErrorToDB(
 
   const errorRecord = {
     errorType: "codeError",
-    ranBy: rowyUser(data.user),
+    ranBy: hanzoUser(data.user),
     description: data.errorDescription,
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
     sparksConfig: data?.sparksConfig ?? "",

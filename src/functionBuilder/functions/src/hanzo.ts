@@ -9,13 +9,13 @@ async function generateAccessToken() {
   const accessToken = await client.getAccessToken();
   return accessToken.token;
 }
-type RowyFile = {
+type HanzoFile = {
   downloadURL: string;
   name: string;
   type: string;
   lastModifiedTS: number;
 };
-type RowyUser = {
+type HanzoUser = {
   email: any;
   emailVerified: boolean;
   displayName: string;
@@ -28,12 +28,12 @@ type uploadOptions = {
   folderPath?: string;
   fileName?: string;
 };
-interface Rowy {
+interface Hanzo {
   metadata: {
     projectId: () => Promise<string>;
     projectNumber: () => Promise<string>;
     serviceAccountEmail: () => Promise<string>;
-    serviceAccountUser: () => Promise<RowyUser>;
+    serviceAccountUser: () => Promise<HanzoUser>;
     serviceAccountAccessToken: () => Promise<string>;
   };
   secrets: {
@@ -44,16 +44,16 @@ interface Rowy {
       url: (
         url: string,
         options?: uploadOptions
-      ) => Promise<RowyFile | undefined>;
+      ) => Promise<HanzoFile | undefined>;
       data: (
         data: Buffer | string,
         options?: uploadOptions
-      ) => Promise<RowyFile | undefined>;
+      ) => Promise<HanzoFile | undefined>;
     };
   };
 }
 
-const rowy: Rowy = {
+const hanzo: Hanzo = {
   metadata: {
     projectId: async () => process.env.GCLOUD_PROJECT,
     projectNumber: async () => "",
@@ -79,4 +79,4 @@ const rowy: Rowy = {
     },
   },
 };
-export default rowy;
+export default hanzo;

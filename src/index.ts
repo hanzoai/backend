@@ -22,14 +22,14 @@ import {
   setOwnerRoles,
   getOwner,
 } from "./setup";
-import { checkIfFTMigrationRequired, migrateFT2Rowy } from "./setup/ft2rowy";
+import { checkIfFTMigrationRequired, migrateFT2Hanzo } from "./setup/ft2hanzo";
 import firebase from "firebase-admin";
 import { getAlgoliaSearchKey } from "./connectTable/algolia";
 
 import { metadataService, getProjectId } from "./metadataService";
 import { getLogs } from "./logging";
 import { auditChange } from "./logging/auditChange";
-import { telemetryError } from "./rowyService";
+import { telemetryError } from "./hanzoService";
 import {
   listSecrets,
   addSecret,
@@ -48,9 +48,9 @@ app.use(cors());
 app.get("/", async (req, res) => {
   const projectId = await getProjectId();
   try {
-    res.redirect(`https://${projectId}.rowy.app`);
+    res.redirect(`https://${projectId}.hanzo.app`);
   } catch (error) {
-    res.redirect(`https://deploy.rowy.app`);
+    res.redirect(`https://deploy.hanzo.app`);
   }
 });
 const functionWrapper = (fn) => async (req, res) => {
@@ -64,7 +64,7 @@ const functionWrapper = (fn) => async (req, res) => {
     res.status(500).send(error);
   }
 };
-// rowy Run Setup
+// hanzo Run Setup
 // get version
 app.get("/version", functionWrapper(version));
 app.get("/region", functionWrapper(region));
@@ -98,16 +98,16 @@ app.post(
 //FT Migration
 
 app.get(
-  "/checkFT2Rowy",
+  "/checkFT2Hanzo",
   requireAuth,
   hasAnyRole(["ADMIN", "OWNER"]),
   checkIfFTMigrationRequired
 );
 app.get(
-  "/migrateFT2Rowy",
+  "/migrateFT2Hanzo",
   requireAuth,
   hasAnyRole(["ADMIN", "OWNER"]),
-  functionWrapper(migrateFT2Rowy)
+  functionWrapper(migrateFT2Hanzo)
 );
 
 // USER MANAGEMENT
@@ -189,7 +189,7 @@ app.post(
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`rowyRun: listening on port ${port}`);
+  console.log(`hanzoRun: listening on port ${port}`);
 });
 
 // Exports for testing purposes.

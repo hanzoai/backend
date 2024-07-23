@@ -1,5 +1,5 @@
 #!/bin/bash
-name=rowy-backend
+name=hanzo-backend
 region=us-central1
 helpFunction()
 {

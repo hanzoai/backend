@@ -151,7 +151,7 @@ export const generateFile = async (configData, buildFolderTimestamp) => {
     documentSelectConfig: serialiseDocumentSelectColumns(documentSelectColumns),
     extensionsConfig: serialiseExtension(extensions, buildFolderTimestamp),
     runtimeOptions: JSON.stringify({
-      serviceAccount: `rowy-functions@${projectId}.iam.gserviceaccount.com`,
+      serviceAccount: `hanzo-functions@${projectId}.iam.gserviceaccount.com`,
       ...runtimeOptions,
     }),
     tableSchema: JSON.stringify(tableSchema),
@@ -159,7 +159,7 @@ export const generateFile = async (configData, buildFolderTimestamp) => {
     searchHost: JSON.stringify(searchHost),
     searchIndices: JSON.stringify(searchIndices),
   };
-  const baseFile = `import fetch from "node-fetch";\n import rowy from "./rowy";\n`;
+  const baseFile = `import fetch from "node-fetch";\n import hanzo from "./hanzo";\n`;
   const fileData = Object.keys(serializedConfigData).reduce((acc, currKey) => {
     return `${acc}\nexport const ${currKey} = ${serializedConfigData[currKey]}`;
   }, ``);
@@ -174,9 +174,9 @@ export const generateFile = async (configData, buildFolderTimestamp) => {
   );
   return Promise.all([
     db
-      .doc(`_rowy_/settings/functions/${functionName}`)
+      .doc(`_hanzo_/settings/functions/${functionName}`)
       .update({ serializedConfig, configData }),
-    db.collection(`_rowy_/settings/functions/${functionName}/history`).add({
+    db.collection(`_hanzo_/settings/functions/${functionName}/history`).add({
       serializedConfig,
       configData,
     }),

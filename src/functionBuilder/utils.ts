@@ -1,7 +1,7 @@
 import admin from "firebase-admin";
 import { transform as sucraseTransform } from "sucrase";
 
-export function rowyUser(
+export function hanzoUser(
   user: admin.auth.UserRecord,
   data?: Record<string, any>
 ) {
@@ -120,7 +120,7 @@ export const getSchemaPaths = ({
       );
       return potentialTables.map(
         (table: any) =>
-          `/_rowy_/settings/schema/${table.id ?? table.collection}/${other
+          `/_hanzo_/settings/schema/${table.id ?? table.collection}/${other
             .map((element, index) => (index % 2 === 0 ? "subTables" : element))
             .join("/")}`
       );
@@ -132,7 +132,7 @@ export const getSchemaPaths = ({
       );
       return collectionTables.map(
         (table: any) =>
-          `/_rowy_/settings/schema/${table.id ?? table.collection}`
+          `/_hanzo_/settings/schema/${table.id ?? table.collection}`
       );
     case "subCollection":
     default:

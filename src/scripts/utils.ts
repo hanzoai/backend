@@ -21,8 +21,8 @@ export const getServiceAccountUser = async () => {
   return {
     email: serviceAccountEmail,
     emailVerified: true,
-    displayName: "Rowy Hooks",
-    photoURL: "https://github.com/rowyio/rowyrun/raw/main/icon.png",
+    displayName: "Hanzo Hooks",
+    photoURL: "https://github.com/hanzoai/backend/raw/main/icon.png",
     uid: `serviceAccount:` + serviceAccountEmail,
     timestamp: new Date().getTime(),
   };

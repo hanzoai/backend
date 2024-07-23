@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import { User } from "../types/User";
 import fetch from "node-fetch";
 import { DocumentReference } from "firebase-admin/firestore";
-import rowy from "./rowy";
+import hanzo from "./hanzo";
 
 type RequestData = {
   refs?: DocumentReference[]; // used in bulkAction
@@ -13,7 +13,7 @@ type RequestData = {
   columnKey: string;
 };
 
-export const authUser2rowyUser = (currentUser: User, data?: any) => {
+export const authUser2hanzoUser = (currentUser: User, data?: any) => {
   const { name, email, uid, email_verified, picture } = currentUser;
   return {
     timestamp: new Date(),
@@ -49,7 +49,7 @@ export const evaluateDerivative = async (req: Request, res: Response) => {
       ${script}
     }`;
     const derivativeFunction = eval(
-      `async({row,db,ref,auth,fetch,rowy})=>` + code.replace(/^.*=>/, "")
+      `async({row,db,ref,auth,fetch,hanzo})=>` + code.replace(/^.*=>/, "")
     );
     const getRows = refs
       ? refs.map(async (r) => db.doc(r.path).get())
@@ -64,13 +64,13 @@ export const evaluateDerivative = async (req: Request, res: Response) => {
           auth,
           ref: doc.ref,
           fetch,
-          rowy,
+          hanzo,
         });
         const update = { [columnKey]: result };
         if (schemaDocData?.audit !== false) {
           update[
             (schemaDocData?.auditFieldUpdatedBy as string) || "_updatedBy"
-          ] = authUser2rowyUser(user!, { updatedField: columnKey });
+          ] = authUser2hanzoUser(user!, { updatedField: columnKey });
         }
         await db.doc(ref.path).update(update);
         return {

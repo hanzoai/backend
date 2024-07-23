@@ -13,7 +13,7 @@ export const listCollections = async (req: Request) => {
     const collections = await db.listCollections();
     return collections
       .map((collection) => collection.id)
-      .filter((id) => id !== "_rowy_");
+      .filter((id) => id !== "_hanzo_");
   }
 };
 

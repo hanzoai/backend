@@ -5,13 +5,13 @@ import {
   getProjectId,
   getServiceAccountEmail,
 } from "../metadataService";
-type RowyFile = {
+type HanzoFile = {
   downloadURL: string;
   name: string;
   type: string;
   lastModifiedTS: number;
 };
-type RowyUser = {
+type HanzoUser = {
   email: any;
   emailVerified: boolean;
   displayName: string;
@@ -34,12 +34,12 @@ async function generateAccessToken() {
   return accessToken.token;
 }
 
-export interface Rowy {
+export interface Hanzo {
   metadata: {
     projectId: () => Promise<string>;
     projectNumber: () => Promise<string>;
     serviceAccountEmail: () => Promise<string>;
-    serviceAccountUser: () => Promise<RowyUser>;
+    serviceAccountUser: () => Promise<HanzoUser>;
     serviceAccountAccessToken: () => Promise<string>;
   };
   secrets: {
@@ -50,15 +50,15 @@ export interface Rowy {
       url: (
         url: string,
         options: uploadOptions
-      ) => Promise<RowyFile | undefined>;
+      ) => Promise<HanzoFile | undefined>;
       data: (
         data: Buffer | string,
         options: uploadOptions
-      ) => Promise<RowyFile | undefined>;
+      ) => Promise<HanzoFile | undefined>;
     };
   };
 }
-const rowy: Rowy = {
+const hanzo: Hanzo = {
   metadata: {
     projectId: getProjectId,
     projectNumber: getNumericProjectId,
@@ -76,4 +76,4 @@ const rowy: Rowy = {
     },
   },
 };
-export default rowy;
+export default hanzo;

@@ -4,9 +4,9 @@ import { User } from "../types/User";
 import fetch from "node-fetch";
 import { transform as sucraseTransform } from "sucrase";
 import { DocumentReference } from "firebase-admin/firestore";
-import rowy from "./rowy";
+import hanzo from "./hanzo";
 import { installDependenciesIfMissing } from "../utils";
-import { telemetryRuntimeDependencyPerformance } from "../rowyService";
+import { telemetryRuntimeDependencyPerformance } from "../hanzoService";
 import { LoggingFactory } from "../logging";
 import { transpile } from "../functionBuilder/utils";
 
@@ -18,7 +18,7 @@ type RequestData = {
   collectionPath?: string;
 };
 
-export const authUser2rowyUser = (currentUser: User, data?: any) => {
+export const authUser2hanzoUser = (currentUser: User, data?: any) => {
   const { name, email, uid, email_verified, picture } = currentUser;
   return {
     timestamp: new Date(),
@@ -53,7 +53,7 @@ export const evaluateDerivative = async (req: Request, res: Response) => {
     }
     const config = schemaDocData.columns[columnKey].config;
     const { derivativeFn, script } = config;
-    const importHeader = `import rowy from "./rowy";\n import fetch from "node-fetch";`;
+    const importHeader = `import hanzo from "./hanzo";\n import fetch from "node-fetch";`;
     const code = transpile(importHeader, derivativeFn, script, "derivative");
 
     const { yarnStartTime, yarnFinishTime, dependenciesString } =
@@ -92,7 +92,7 @@ export const evaluateDerivative = async (req: Request, res: Response) => {
             ref: doc.ref,
             fetch,
             storage,
-            rowy,
+            hanzo,
             logging,
             tableSchema: schemaDocData,
           });
@@ -100,7 +100,7 @@ export const evaluateDerivative = async (req: Request, res: Response) => {
           if (schemaDocData?.audit !== false) {
             update[
               (schemaDocData?.auditFieldUpdatedBy as string) || "_updatedBy"
-            ] = authUser2rowyUser(user!, { updatedField: columnKey });
+            ] = authUser2hanzoUser(user!, { updatedField: columnKey });
           }
           await batch.update(doc.ref, update);
           return {

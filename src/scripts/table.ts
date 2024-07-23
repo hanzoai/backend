@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import { User } from "../types/User";
 import fetch from "node-fetch";
 import { CollectionGroup, CollectionReference } from "firebase-admin/firestore";
-import rowy, { Rowy } from "./rowy";
+import hanzo, { Hanzo } from "./hanzo";
 import { Auth } from "firebase-admin/auth";
 import * as admin from "firebase-admin";
 
@@ -25,14 +25,14 @@ type ActionArgs = {
   db: FirebaseFirestore.Firestore;
   auth: Auth;
   user: User | ServiceAccountUser;
-  rowy: Rowy;
+  hanzo: Hanzo;
   fetch: any;
   storage: admin.storage.Storage;
 };
 
 type TableAction = (args: ActionArgs) => Promise<void> | void;
 
-export const authUser2rowyUser = (currentUser: User, data?: any) => {
+export const authUser2hanzoUser = (currentUser: User, data?: any) => {
   const { name, email, uid, email_verified, picture } = currentUser;
   return {
     timestamp: new Date(),
@@ -65,7 +65,7 @@ export const tableAction = async (req: Request, res: Response) => {
     const { fn } = config;
     const fnBody = fn.replace(/^.*=>/, "");
     const tableAction = eval(
-      `async({db,ref,auth,fetch,rowy,storage})=>` + fnBody
+      `async({db,ref,auth,fetch,hanzo,storage})=>` + fnBody
     ) as TableAction;
 
     const results = await tableAction({
@@ -78,7 +78,7 @@ export const tableAction = async (req: Request, res: Response) => {
       fetch,
       user,
       storage,
-      rowy,
+      hanzo,
     });
     return res.send({
       success: true,

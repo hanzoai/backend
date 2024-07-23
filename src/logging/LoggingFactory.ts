@@ -3,7 +3,7 @@ import { getProjectId } from "../metadataService";
 
 type FunctionType = "action" | "connector" | "derivative-script";
 
-interface RowyLogging {
+interface HanzoLogging {
   log: (payload: any) => void;
   warn: (payload: any) => void;
   error: (payload: any) => void;
@@ -56,7 +56,7 @@ class LoggingFactory {
   }
 }
 
-class LoggingAbstract implements RowyLogging {
+class LoggingAbstract implements HanzoLogging {
   protected readonly functionType;
   protected readonly logging: Logging;
 
@@ -82,7 +82,7 @@ class LoggingAbstract implements RowyLogging {
   }
 }
 
-class LoggingFieldAndRow extends LoggingAbstract implements RowyLogging {
+class LoggingFieldAndRow extends LoggingAbstract implements HanzoLogging {
   private readonly fieldName: string;
   private readonly rowId: string;
   private readonly tablePath: string;
@@ -101,7 +101,7 @@ class LoggingFieldAndRow extends LoggingAbstract implements RowyLogging {
   }
 
   async logWithSeverity(payload: any[], severity: string) {
-    const log = this.logging.log(`rowy-logging`);
+    const log = this.logging.log(`hanzo-logging`);
     const metadata = {
       severity,
     };
@@ -123,4 +123,4 @@ class LoggingFieldAndRow extends LoggingAbstract implements RowyLogging {
   }
 }
 
-export { LoggingFactory, RowyLogging };
+export { LoggingFactory, HanzoLogging };

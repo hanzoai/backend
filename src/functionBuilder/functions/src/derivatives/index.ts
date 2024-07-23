@@ -2,7 +2,7 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { db, auth, storage } from "../firebaseConfig";
 import utilFns from "../utils";
-import { LoggingFactory, RowyLogging } from "../logging";
+import { LoggingFactory, HanzoLogging } from "../logging";
 import { tableSchema } from "../functionConfig";
 const derivative =
   (
@@ -16,7 +16,7 @@ const derivative =
         auth: admin.auth.Auth;
         storage: admin.storage.Storage;
         utilFns: any;
-        logging: RowyLogging;
+        logging: HanzoLogging;
         tableSchema: any;
       }) => any;
     }[]

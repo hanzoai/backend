@@ -3,7 +3,7 @@ import * as path from "path";
 import { IExtension } from "./types";
 import { getRequiredPackages } from "../../../utils";
 import { transpile } from "../../utils";
-const headerImports = `import rowy from '../rowy';\n import fetch from 'node-fetch';\n`;
+const headerImports = `import hanzo from '../hanzo';\n import fetch from 'node-fetch';\n`;
 const removeInlineVersioning = (code: string) =>
   code.replace(
     /(?:require\(.*)@\d+\.\d+\.\d+/g,

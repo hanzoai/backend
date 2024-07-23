@@ -7,7 +7,7 @@ export const serviceAccountAccess = async (req: Request, res: Response) => {
     // test access to firestore
     try {
       await db.listCollections();
-      const testDocRef = db.doc("_rowy_/testingAccess");
+      const testDocRef = db.doc("_hanzo_/testingAccess");
       await testDocRef.set({ success: true });
       const testDoc = await testDocRef.get();
       if (!testDoc.exists) access.firestore = false;
@@ -22,10 +22,10 @@ export const serviceAccountAccess = async (req: Request, res: Response) => {
       let testUser;
       try {
         testUser = await auth.createUser({
-          email: "test@test.rowy",
+          email: "test@test.hanzo",
         });
       } catch (error) {
-        testUser = await auth.getUserByEmail("test@test.rowy");
+        testUser = await auth.getUserByEmail("test@test.hanzo");
       }
 
       await auth.deleteUser(testUser.uid);

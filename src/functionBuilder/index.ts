@@ -24,7 +24,7 @@ export const functionBuilder = async (
     if (!pathname || !tablePath)
       return { success: false, message: `missing pathname or tablePath` };
     // get settings Document
-    const settings = await db.doc(`_rowy_/settings`).get();
+    const settings = await db.doc(`_hanzo_/settings`).get();
     const tables = settings.get("tables");
     const collectionType = getCollectionType(pathname);
     const collectionPath = getCollectionPath(
@@ -40,7 +40,7 @@ export const functionBuilder = async (
       collectionPath,
       table?.triggerDepth
     );
-    const functionConfigPath = `_rowy_/settings/functions/${functionName}`;
+    const functionConfigPath = `_hanzo_/settings/functions/${functionName}`;
 
     const streamLogger = await createStreamLogger(functionConfigPath);
     await streamLogger.info(
@@ -86,7 +86,7 @@ export const functionBuilder = async (
           tableSchemaPaths,
           functionName,
           triggerPath,
-          rowySettings: settings.data(),
+          hanzoSettings: settings.data(),
         },
         user,
         streamLogger,

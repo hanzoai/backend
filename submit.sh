@@ -1,6 +1,6 @@
 #!/bin/bash
-name=rowy-backend
-project_id=rowy-run
+name=hanzo-backend
+project_id=hanzo-run
 yarn
 npx tsc
 npm run build

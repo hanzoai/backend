@@ -4,9 +4,9 @@ import { Request, Response } from "express";
 import { User } from "../types/User";
 import fetch from "node-fetch";
 import { FieldValue } from "firebase-admin/firestore";
-import rowy from "./rowy";
+import hanzo from "./hanzo";
 import { installDependenciesIfMissing } from "../utils";
-import { telemetryRuntimeDependencyPerformance } from "../rowyService";
+import { telemetryRuntimeDependencyPerformance } from "../hanzoService";
 import { LoggingFactory } from "../logging";
 import { transpile } from "../functionBuilder/utils";
 
@@ -31,7 +31,7 @@ const missingFieldsReducer = (data: any) => (acc: string[], curr: string) => {
   } else return acc;
 };
 
-export const authUser2rowyUser = (currentUser: User, data?: any) => {
+export const authUser2hanzoUser = (currentUser: User, data?: any) => {
   const { name, email, uid, email_verified, picture } = currentUser;
   return {
     timestamp: new Date(),
@@ -69,7 +69,7 @@ export const actionScript = async (req: Request, res: Response) => {
     }
     const config = schemaDocData.columns[column.key].config;
     const { script, requiredRoles, requiredFields, runFn, undoFn } = config;
-    const importHeader = `import rowy from "./rowy";\n import fetch from "node-fetch";\n`;
+    const importHeader = `import hanzo from "./hanzo";\n import fetch from "node-fetch";\n`;
     const runFunctionCode = transpile(importHeader, runFn, script, "action");
     const undoFunctionCode = transpile(
       importHeader,
@@ -124,9 +124,9 @@ export const actionScript = async (req: Request, res: Response) => {
           auth,
           ref: doc.ref,
           actionParams,
-          user: { ...authUser2rowyUser(user), roles: userRoles },
+          user: { ...authUser2hanzoUser(user), roles: userRoles },
           fetch,
-          rowy,
+          hanzo,
           logging,
           storage,
           tableSchema: schemaDocData,
@@ -142,7 +142,7 @@ export const actionScript = async (req: Request, res: Response) => {
             if (schemaDocData?.audit !== false) {
               update[
                 (schemaDocData?.auditFieldUpdatedBy as string) || "_updatedBy"
-              ] = authUser2rowyUser(user!, { updatedField: column.key });
+              ] = authUser2hanzoUser(user!, { updatedField: column.key });
             }
             await db.doc(ref.path).update(update);
           } catch (error) {

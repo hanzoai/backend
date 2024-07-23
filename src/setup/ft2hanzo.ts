@@ -2,9 +2,9 @@
 import { Request, Response } from "express";
 import { db } from "../firebaseConfig";
 
-const ROWY_SETTINGS = "_rowy_/settings";
-const ROWY_TABLE_SCHEMAS = `${ROWY_SETTINGS}/schema`;
-const ROWY_GROUP_TABLE_SCHEMAS = `${ROWY_SETTINGS}/groupSchema`;
+const HANZO_SETTINGS = "_hanzo_/settings";
+const HANZO_TABLE_SCHEMAS = `${HANZO_SETTINGS}/schema`;
+const HANZO_GROUP_TABLE_SCHEMAS = `${HANZO_SETTINGS}/groupSchema`;
 const FT_SETTINGS = "_FIRETABLE_/settings";
 const FT_TABLE_SCHEMAS = `${FT_SETTINGS}/schema`;
 const FT_GROUP_TABLE_SCHEMAS = `${FT_SETTINGS}/groupSchema`;
@@ -20,7 +20,7 @@ export const checkIfFTMigrationRequired = async (
       message: "Firetable Settings doesn't exist",
     });
   const migrated =
-    (await db.doc(ROWY_SETTINGS).get()).data()?.migratedToV2 !== undefined;
+    (await db.doc(HANZO_SETTINGS).get()).data()?.migratedToV2 !== undefined;
   if (migrated)
     return res.send({
       migrationRequired: false,
@@ -41,9 +41,9 @@ export const checkIfFTMigrationRequired = async (
   });
 };
 
-export const migrateFT2Rowy = async () => {
+export const migrateFT2Hanzo = async () => {
   const migrated =
-    (await db.doc(ROWY_SETTINGS).get()).data()?.migratedToV2 !== undefined;
+    (await db.doc(HANZO_SETTINGS).get()).data()?.migratedToV2 !== undefined;
   if (migrated) throw new Error("Migration has already been done");
   const ftSettingsDoc = await db.doc(FT_SETTINGS).get();
   const oldTables = ftSettingsDoc.get("tables");
@@ -56,19 +56,19 @@ export const migrateFT2Rowy = async () => {
       ...rest,
     };
   });
-  await db.doc(ROWY_SETTINGS).set({ tables: newTables }, { merge: true });
+  await db.doc(HANZO_SETTINGS).set({ tables: newTables }, { merge: true });
   const tables = await db.collection(FT_TABLE_SCHEMAS).get();
   const groupTables = await db.collection(FT_GROUP_TABLE_SCHEMAS).get();
   const promises = [
     ...tables.docs.map((table) =>
       db
-        .collection(ROWY_TABLE_SCHEMAS)
+        .collection(HANZO_TABLE_SCHEMAS)
         .doc(table.id)
         .set(table.data(), { merge: true })
     ),
     ...groupTables.docs.map((table) =>
       db
-        .collection(ROWY_GROUP_TABLE_SCHEMAS)
+        .collection(HANZO_GROUP_TABLE_SCHEMAS)
         .doc(table.id)
         .set(table.data(), { merge: true })
     ),
@@ -77,10 +77,10 @@ export const migrateFT2Rowy = async () => {
   const subtables = await db.collectionGroup("subTables").get();
   const addedSubtables = subtables.docs.map((subtable) => {
     return db
-      .doc(subtable.ref.path.replace("_FIRETABLE_", "_rowy_"))
+      .doc(subtable.ref.path.replace("_FIRETABLE_", "_hanzo_"))
       .set(subtable.data());
   });
   await Promise.all(addedSubtables);
-  await db.doc(ROWY_SETTINGS).update({ migratedToV2: true });
+  await db.doc(HANZO_SETTINGS).update({ migratedToV2: true });
   return { success: true };
 };

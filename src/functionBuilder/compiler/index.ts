@@ -21,7 +21,7 @@ export default async function generateConfig(
     functionName: string;
     triggerPath: string;
     tableSchemaPaths: string[];
-    rowySettings: DocumentData;
+    hanzoSettings: DocumentData;
   },
   user: admin.auth.UserRecord,
   streamLogger,
@@ -64,7 +64,7 @@ export default async function generateConfig(
     tableSchemaPaths,
     triggerPath,
     functionName,
-    rowySettings,
+    hanzoSettings,
   } = data;
   const configs = (
     await Promise.all(
@@ -84,8 +84,8 @@ export default async function generateConfig(
   );
 
   await streamLogger.info(`Generating config file...`);
-  const region = rowySettings.cloudFunctionsRegion ?? "us-central1";
-  const searchHost = rowySettings.services?.search ?? null;
+  const region = hanzoSettings.cloudFunctionsRegion ?? "us-central1";
+  const searchHost = hanzoSettings.services?.search ?? null;
   await generateFile(
     {
       ...combinedConfig,

@@ -6,8 +6,8 @@ const meta = require("../package.json");
 const getAxiosInstance = async () => {
   const baseURL =
     process.env.DEV === "true"
-      ? "https://rowy-run-service-gkxqefhk3q-uc.a.run.app"
-      : "https://rowy.run/";
+      ? "https://hanzo-run-service-xxxxxxxxxx-xx.x.run.app"
+      : "https://hanzo.run/";
   const authToken = await generateServiceAccessToken(baseURL);
   return axios.create({
     baseURL,
@@ -33,7 +33,7 @@ export const getExtension = async (
 let projectId;
 
 const telemetryInstance = axios.create({
-  baseURL: "https://rowy.events/",
+  baseURL: "https://hanzo.events/",
   timeout: 1000,
   headers: {
     "Content-Type": "application/json",

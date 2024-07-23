@@ -1,12 +1,12 @@
 import { auth, db } from "../firebaseConfig";
 import { Request, Response } from "express";
-import { rowyUsers } from "../constants/Collections";
+import { hanzoUsers } from "../constants/Collections";
 export const setUserRoles = async (req: Request, res: Response) => {
   try {
     const { email, roles } = req.body;
     // check if user exists
     const userQuery = await db
-      .collection(rowyUsers)
+      .collection(hanzoUsers)
       .where("user.email", "==", email)
       .get();
     if (userQuery.docs.length === 0) {

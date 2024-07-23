@@ -1,8 +1,8 @@
-export const rowyUsers = "_rowy_/userManagement/users";
-export const rowyUsersImpersonationLogs =
-  "_rowy_/userManagement/impersonationLogs";
+export const hanzoUsers = "_hanzo_/userManagement/users";
+export const hanzoUsersImpersonationLogs =
+  "_hanzo_/userManagement/impersonationLogs";
 
 export default {
-  rowyUsers,
-  rowyUsersImpersonationLogs,
+  hanzoUsers,
+  hanzoUsersImpersonationLogs,
 };

@@ -1,6 +1,6 @@
 import { auth, db } from "../firebaseConfig";
 import { Request, Response } from "express";
-import { rowyUsersImpersonationLogs } from "../constants/Collections";
+import { hanzoUsersImpersonationLogs } from "../constants/Collections";
 export const impersonateUser = async (req: Request, res: Response) => {
   try {
     const impersonator = res.locals.user;
@@ -8,7 +8,7 @@ export const impersonateUser = async (req: Request, res: Response) => {
     // check if user exists
     const user = await auth.getUserByEmail(email);
     const token = await auth.createCustomToken(user.uid);
-    await db.collection(rowyUsersImpersonationLogs).add({
+    await db.collection(hanzoUsersImpersonationLogs).add({
       createdAt: new Date(),
       impersonatedUid: user.uid,
       impersonatedUserEmail: email,

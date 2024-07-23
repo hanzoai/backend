@@ -3,12 +3,12 @@ import { Request, Response } from "express";
 import { User } from "../types/User";
 import fetch from "node-fetch";
 import { DocumentReference } from "firebase-admin/firestore";
-import rowy, { Rowy } from "./rowy";
+import hanzo, { Hanzo } from "./hanzo";
 import { Auth } from "firebase-admin/auth";
 import * as admin from "firebase-admin";
 import { installDependenciesIfMissing } from "../utils";
-import { telemetryRuntimeDependencyPerformance } from "../rowyService";
-import { LoggingFactory, RowyLogging } from "../logging";
+import { telemetryRuntimeDependencyPerformance } from "../hanzoService";
+import { LoggingFactory, HanzoLogging } from "../logging";
 import { transpile } from "../functionBuilder/utils";
 
 type ConnectorRequest = {
@@ -24,16 +24,16 @@ type ConnectorArgs = {
   db: FirebaseFirestore.Firestore;
   auth: Auth;
   user: User;
-  rowy: Rowy;
+  hanzo: Hanzo;
   fetch: any;
   storage: admin.storage.Storage;
-  logging: RowyLogging;
+  logging: HanzoLogging;
   tableSchema: any;
 };
 
 type Connector = (args: ConnectorArgs) => Promise<any[]> | any[];
 
-export const authUser2rowyUser = (currentUser: User, data?: any) => {
+export const authUser2hanzoUser = (currentUser: User, data?: any) => {
   const { name, email, uid, email_verified, picture } = currentUser;
   return {
     timestamp: new Date(),
@@ -65,7 +65,7 @@ export const connector = async (req: Request, res: Response) => {
     }
     const config = schemaDocData.columns[columnKey].config;
     const { connectorFn } = config;
-    const importHeader = `import rowy from "./rowy";\n import fetch from "node-fetch";\n`;
+    const importHeader = `import hanzo from "./hanzo";\n import fetch from "node-fetch";\n`;
 
     const connectorFnBody = transpile(
       importHeader,
@@ -102,7 +102,7 @@ export const connector = async (req: Request, res: Response) => {
       fetch,
       user,
       storage,
-      rowy,
+      hanzo,
       logging,
       tableSchema: schemaDocData,
     });

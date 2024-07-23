@@ -1,5 +1,5 @@
 import { auth } from "../firebaseConfig";
-import { telemetry, telemetryError } from "../rowyService";
+import { telemetry, telemetryError } from "../hanzoService";
 import { Request } from "express";
 
 export const requireAuth = async (req: Request, res: any, next: any) => {
