@@ -1,6 +1,6 @@
 #!/bin/bash
 name=hanzo-backend
-project_id=hanzo-run
+project_id=hanzo-production
 yarn
 npx tsc
 npm run build
