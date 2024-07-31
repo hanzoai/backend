@@ -1,6 +1,9 @@
 export { default as AutoSave } from './AutoSave';
 export * from './AutoSave';
 
+export { default as fields } from './constants/fields';
+export * from './constants/fields';
+
 export { default as FieldAssistiveText } from './FieldAssistiveText';
 export * from './FieldAssistiveText';
 
@@ -9,12 +12,6 @@ export * from './FieldErrorMessage';
 
 export { default as FieldLabel } from './FieldLabel';
 export * from './FieldLabel';
-
-export { default as FieldSkeleton } from './FieldSkeleton';
-export * from './FieldSkeleton';
-
-export { default as FieldWrapper } from './FieldWrapper';
-export * from './FieldWrapper';
 
 export { default as CheckboxComponent } from './Fields/Checkbox/CheckboxComponent';
 export * from './Fields/Checkbox/CheckboxComponent';
@@ -79,6 +76,10 @@ export * from './Fields/Hidden/HiddenSettings';
 
 export * from './Fields/Hidden';
 
+export * from './Fields';
+
+export * from './Fields/List';
+
 export { default as ListComponent } from './Fields/List/ListComponent';
 export * from './Fields/List/ListComponent';
 
@@ -88,7 +89,7 @@ export * from './Fields/List/ListItem';
 export { default as ListSettings } from './Fields/List/ListSettings';
 export * from './Fields/List/ListSettings';
 
-export * from './Fields/List';
+export * from './Fields/MultiSelect';
 
 export { default as MultiSelectComponent } from './Fields/MultiSelect/MultiSelectComponent';
 export * from './Fields/MultiSelect/MultiSelectComponent';
@@ -96,7 +97,7 @@ export * from './Fields/MultiSelect/MultiSelectComponent';
 export { default as MultiSelectSettings } from './Fields/MultiSelect/MultiSelectSettings';
 export * from './Fields/MultiSelect/MultiSelectSettings';
 
-export * from './Fields/MultiSelect';
+export * from './Fields/Paragraph';
 
 export { default as ParagraphComponent } from './Fields/Paragraph/ParagraphComponent';
 export * from './Fields/Paragraph/ParagraphComponent';
@@ -104,7 +105,7 @@ export * from './Fields/Paragraph/ParagraphComponent';
 export { default as ParagraphSettings } from './Fields/Paragraph/ParagraphSettings';
 export * from './Fields/Paragraph/ParagraphSettings';
 
-export * from './Fields/Paragraph';
+export * from './Fields/Radio';
 
 export { default as RadioComponent } from './Fields/Radio/RadioComponent';
 export * from './Fields/Radio/RadioComponent';
@@ -112,7 +113,7 @@ export * from './Fields/Radio/RadioComponent';
 export { default as RadioSettings } from './Fields/Radio/RadioSettings';
 export * from './Fields/Radio/RadioSettings';
 
-export * from './Fields/Radio';
+export * from './Fields/Score';
 
 export { default as ScoreComponent } from './Fields/Score/ScoreComponent';
 export * from './Fields/Score/ScoreComponent';
@@ -120,7 +121,7 @@ export * from './Fields/Score/ScoreComponent';
 export { default as ScoreSettings } from './Fields/Score/ScoreSettings';
 export * from './Fields/Score/ScoreSettings';
 
-export * from './Fields/Score';
+export * from './Fields/ShortText';
 
 export { default as ShortTextComponent } from './Fields/ShortText/ShortTextComponent';
 export * from './Fields/ShortText/ShortTextComponent';
@@ -131,7 +132,7 @@ export * from './Fields/ShortText/ShortTextSettings';
 export { default as ShortTextValidation } from './Fields/ShortText/ShortTextValidation';
 export * from './Fields/ShortText/ShortTextValidation';
 
-export * from './Fields/ShortText';
+export * from './Fields/SingleSelect';
 
 export { default as SingleSelectComponent } from './Fields/SingleSelect/SingleSelectComponent';
 export * from './Fields/SingleSelect/SingleSelectComponent';
@@ -139,7 +140,7 @@ export * from './Fields/SingleSelect/SingleSelectComponent';
 export { default as SingleSelectSettings } from './Fields/SingleSelect/SingleSelectSettings';
 export * from './Fields/SingleSelect/SingleSelectSettings';
 
-export * from './Fields/SingleSelect';
+export * from './Fields/Slider';
 
 export { default as SliderComponent } from './Fields/Slider/SliderComponent';
 export * from './Fields/Slider/SliderComponent';
@@ -147,9 +148,11 @@ export * from './Fields/Slider/SliderComponent';
 export { default as SliderSettings } from './Fields/Slider/SliderSettings';
 export * from './Fields/Slider/SliderSettings';
 
-export * from './Fields/Slider';
+export { default as FieldSkeleton } from './FieldSkeleton';
+export * from './FieldSkeleton';
 
-export * from './Fields';
+export { default as FieldWrapper } from './FieldWrapper';
+export * from './FieldWrapper';
 
 export { default as Form } from './Form';
 export * from './Form';
@@ -171,9 +174,6 @@ export * from './SubmitButton';
 
 export { default as SubmitError } from './SubmitError';
 export * from './SubmitError';
-
-export { default as fields } from './constants/fields';
-export * from './constants/fields';
 
 export * from './types';
 

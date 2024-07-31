@@ -1,6 +1,6 @@
 {
-  "name": "@hanzo/api",
-  "description": "Cloud Run instance for deploying Hanzo's backend functionality",
+  "name": "@hanzo/backend",
+  "description": "cloud run instance for running Hanzo's backend functionality",
   "version": "1.9.3",
   "private": true,
   "main": "build/index.js",
@@ -11,7 +11,7 @@
     "system-test": "NAME=Cloud mocha test/system.test.js --timeout=180000",
     "lint": "eslint '**/*.js'",
     "fix": "eslint --fix '**/*.js'",
-    "build": "tsc;cpy --cwd=src --parents '**/*.json' ../build/",
+    "build": "tsc && cpy --cwd=src --parents '**/*.json' ../build/",
     "deploy": "./deploy.sh --project"
   },
   "engines": {
@@ -50,5 +50,10 @@
     "ts-node": "^9.1.1",
     "tslint": "^6.1.0",
     "typescript": "^4.6.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

@@ -281,7 +281,7 @@ export default function TableSettingsDialog() {
         return (
           <>
             <Controller
-              control={formFieldsProps.control}
+              // control={formFieldsProps.control}
               name="_schema"
               defaultValue={{}}
               render={() => <></>}

@@ -1,5 +1,5 @@
 {
-  "version": "0.8.0",
+  "version": "0.8.6",
   "name": "@hanzo/form-builder",
   "publishConfig": {
     "access": "public"
@@ -17,8 +17,10 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "node generate-exports && git add src/index.ts && tsdx build",
+    "build": "node generate-exports && git add src/index.ts && tsdx build --format esm --tsconfig ./tsconfig.json",
+    "prepublishOnly": "node generate-exports && git add src/index.ts && tsdx build --format esm --tsconfig ./tsconfig.json",
     "lint": "tsdx lint",
+    "prepare": "tsdx build --format esm --tsconfig ./tsconfig.json",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -26,7 +28,7 @@
     "@mui/icons-material": "^5.4.1",
     "@mui/material": "^5.4.1",
     "@mui/x-date-pickers": "^5.0.9",
-    "@hanzo/multiselect": "^0.2.3",
+    "@hanzo/multiselect": "^0.4.4",
     "react": "^17.0.2"
   },
   "prettier": {
@@ -35,7 +37,9 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "module": "dist/form-builder.esm.js",
+  "exports": {
+    "import": "./dist/index.js"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@emotion/react": "^11.4.0",
@@ -43,13 +47,7 @@
     "@mui/icons-material": "^5.4.1",
     "@mui/material": "^5.4.1",
     "@mui/x-date-pickers": "^5.0.9",
-    "@hanzo/multiselect": "^0.4.1",
-    "@storybook/addon-actions": "^6.3.8",
-    "@storybook/addon-docs": "^6.3.8",
-    "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-links": "^6.3.8",
-    "@storybook/addons": "^6.3.8",
-    "@storybook/react": "^6.3.8",
+    "@hanzo/multiselect": "^0.4.4",
     "@types/dompurify": "^2.2.2",
     "@types/react": "^17.0.13",
     "@types/react-color": "^3.0.4",
@@ -79,8 +77,8 @@
     "react-dnd": "^14.0.2",
     "react-dnd-html5-backend": "^14.0.0",
     "react-element-scroll-hook": "^1.1.0",
-    "react-hook-form": "^7.10.0",
-    "use-debounce": "^8.0.0",
+    "react-hook-form": "^7.39.7",
+    "use-debounce": "^9.0.4",
     "yup": "^0.32.9"
   }
 }
