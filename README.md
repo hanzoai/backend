@@ -26,3 +26,6 @@ Since "pnpm" is a finger twister, many people alias it to "pn". For example, wit
 - A potent React framework using Next 14, Tailwind and Radix
 - Renders most content from simple 'Block' definitions (in `/src/content` )
 - Lives [on GitHub here](https://github.com/hanzoai/react-sdk)
+
+## Proof of Commit
+it is woo!
