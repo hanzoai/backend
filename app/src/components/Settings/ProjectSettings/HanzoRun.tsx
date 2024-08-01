@@ -23,14 +23,19 @@ export default function HanzoRun({
   settings,
   updateSettings,
 }: IProjectSettingsChildProps) {
-  const [inputHanzoRunUrl, setInputHanzoRunUrl] = useState(settings.hanzoRunUrl);
+  const [inputHanzoRunUrl, setInputHanzoRunUrl] = useState(
+    settings.hanzoRunUrl
+  );
   const [verified, setVerified] = useState<boolean | "LOADING" | undefined>();
   const handleVerify = async () => {
     setVerified("LOADING");
     try {
-      const versionReq = await fetch(inputHanzoRunUrl + runRoutes.version.path, {
-        method: runRoutes.version.method,
-      }).then((res) => res.json());
+      const versionReq = await fetch(
+        inputHanzoRunUrl + runRoutes.version.path,
+        {
+          method: runRoutes.version.method,
+        }
+      ).then((res) => res.json());
 
       if (!versionReq.version) throw new Error("No version found");
       else {
@@ -52,7 +57,11 @@ export default function HanzoRun({
   const [latestUpdate, checkForUpdates, loading] = useUpdateCheck();
 
   const deployButton = (
-    <Button href={WIKI_LINKS.hanzoRun} target="_blank" rel="noopener noreferrer">
+    <Button
+      href={WIKI_LINKS.hanzoRun}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       Deploy instructions
     </Button>
   );
