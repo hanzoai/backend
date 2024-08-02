@@ -17,3 +17,5 @@ build
 .vscode/
 dist/
 coverage/
+
+set-admin-role/*firebase-service-account*.json

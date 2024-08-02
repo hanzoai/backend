@@ -8,6 +8,9 @@ build
 # Ignore .env file
 .env
 
+# Ignore firebase-adminsdk
+*firebase-adminsdk*.json
+
 # Other common ignores
 .DS_Store
 *.log

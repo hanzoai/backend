@@ -5,7 +5,7 @@ import { TransitionProps } from "react-transition-group/Transition";
 import { TransitionProps as MuiTransitionProps } from "@mui/material/transitions";
 
 export const ModalTransition: React.ForwardRefExoticComponent<
-  Pick<TransitionProps, React.ReactText> & React.RefAttributes<any>
+  Pick<TransitionProps, string | number> & React.RefAttributes<any>
 > = forwardRef(function ModalTransition(
   { children, ...props }: TransitionProps,
   ref: React.Ref<any>

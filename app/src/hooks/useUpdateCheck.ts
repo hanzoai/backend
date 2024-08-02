@@ -21,6 +21,8 @@ const UPDATE_ENDPOINTS = {
   hanzoRun:
     EXTERNAL_LINKS.hanzoRunGitHub.replace("github.com", "api.github.com/repos") +
     "/releases/latest",
+  // hanzo: 'http://localhost:8080',
+  // hanzoRun: 'http://localhost:8080'
 };
 
 /**

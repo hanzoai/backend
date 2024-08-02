@@ -27,7 +27,7 @@ export default function AccessDenied({ resetErrorBoundary }: FallbackProps) {
   const [currentUser] = useAtom(currentUserAtom, projectScope);
   const [userRoles] = useAtom(userRolesAtom, projectScope);
 
-  if (!currentUser) window.location.reload();
+  // if (!currentUser) window.location.reload();
 
   return (
     <EmptyState

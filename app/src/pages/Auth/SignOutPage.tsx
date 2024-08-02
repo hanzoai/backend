@@ -14,6 +14,7 @@ export default function SignOutPage() {
   const [firebaseAuth] = useAtom(firebaseAuthAtom, projectScope);
 
   useEffect(() => {
+    console.log("this is sign out")
     signOut(firebaseAuth);
   }, [firebaseAuth]);
 
